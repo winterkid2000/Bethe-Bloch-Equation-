@@ -1,0 +1,26 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+Z_values = np.arange(1, 101)  # Z from 1 to 100
+A_values = 2 * Z_values  # Approximate atomic mass (A ~ 2Z for most elements)
+beta = 0.9  # Assumed particle speed as a fraction of the speed of light
+gamma = 1 / np.sqrt(1 - beta**2)
+I = 10 * Z_values  # Approximate ionization energy proportional to Z
+
+# Bethe-Bloch formula (simplified for mass stopping power)
+def mass_stopping_power(Z, A, beta, gamma, I):
+    return (Z / A) * (1 / beta**2) * np.log((2 * gamma**2 * beta**2) / I)
+
+# Compute mass stopping power
+stopping_powers = mass_stopping_power(Z_values, A_values, beta, gamma, I)
+
+# Plot results
+plt.figure(figsize=(10, 6))
+plt.plot(Z_values, stopping_powers, label='Mass Stopping Power per Unit Mass')
+plt.xlabel('Atomic Number (Z)')
+plt.ylabel('Stopping Power per Unit Mass')
+plt.title('Mass Stopping Power vs Atomic Number')
+plt.grid(True)
+plt.legend()
+plt.show()
